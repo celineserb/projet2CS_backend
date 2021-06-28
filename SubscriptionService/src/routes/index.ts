@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { get, getSubTypes, addSubscription,getSubscriptionCards,getSubscriptionByTenant, 
-    deleteExpiredSubscriptions, activateSubscription, hasSubscription,getSubType,
+    deleteExpiredSubscriptions, activateSubscription, subscriptionState,getSubType,
     debitBalance, getBalance, rechargeCard, updateSuscriptionType, getActiveSubscriptions,
     getPendingSubscriptions, getExpiredSubscriptions}
      from '../controllers/SubscriptionController'
@@ -9,7 +9,7 @@ const router = Router();
 
 router.get('/', get);
 router.get('/getSubTypes', getSubTypes)
-router.get('/hasSubscription/:idTenant',hasSubscription)
+router.get('/subState/:idTenant',subscriptionState)
 router.get('/getSubType/:idSubType',getSubType)
 router.get('/getSubByTenant/:idTenant', getSubscriptionByTenant)
 router.get('/getSubCards', getSubscriptionCards)
