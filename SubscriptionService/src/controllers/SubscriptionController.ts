@@ -26,7 +26,7 @@ export async function subscriptionState(req: Request, res: Response){
             idTenant : req.params.idTenant
         }
     })
-    if(subscription.length==1){
+    if(subscription.length>0){
         res.send(subscription[0].subState)
     }else{
         res.send("nope")
