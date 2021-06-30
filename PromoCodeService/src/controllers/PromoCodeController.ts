@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { getManager } from "typeorm";
 import { PromoCode } from "../entity/PromoCode";
+import { Tenant } from "../entity/Tenant";
 
 
 // Function for testing server response
@@ -101,5 +102,14 @@ export async function updatePromoCode(req: Request, res:Response) {
         res.status(404).json({
             msg : "Promo code doesn't exist"
         })
+    }
+}
+
+export async function getPoints(req: Request, res:Response) {
+    const tenant = await Tenant.findOne(req.params.idTenant)
+    if(tenant){
+        res.json(tenant.points)
+    }else{
+        res.json("This tenant doesn't exist")
     }
 }
