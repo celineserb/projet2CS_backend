@@ -27,7 +27,7 @@ export async function applyPromoCode(_req : Request, _res: Response){
     const promoCode = await PromoCode.findOne(_req.params.idPromoCode)
 
     if(promoCode){
-        if(tenant&&(tenant.accountState=='Activated')){
+        if(tenant&&(tenant.accountState=='validated')){
             if(tenant.points>=promoCode.pricePoints){
                     tenant.points = tenant.points - promoCode.pricePoints
                     console.log(tenant.points)

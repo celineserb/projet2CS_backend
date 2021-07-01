@@ -9,7 +9,7 @@ var request = require("supertest");
 
 const tenant ={
     idTenant: 1,
-    accountState:'Activated',
+    accountState:'validated',
     points: 30
 }
 
@@ -61,7 +61,7 @@ describe("Testing Promocode controller", () => {
             expect(text).toEqual(JSON.stringify(
                 {
                     idTenant: 1,
-                    accountState:'Activated',
+                    accountState:'validated',
                     points: 20
                 }
             ))
