@@ -8,12 +8,12 @@ var request = require("supertest");
 
 const tenant = {
     idTenant: 1,
-    accountState:'Activated',
+    accountState:'validated',
     subCard: 3
 }
 const tenant2 ={
     idTenant: 1,
-    accountState:'Activated',
+    accountState:'validated',
     subCard: null
 }
 const subType1 = {
@@ -66,7 +66,7 @@ describe("Testing Subscription Service", () => {
                 new Promise<any>((resolve, _reject) => resolve(
                 {
                     idTenant: 1,
-                    accountState:'Activated',
+                    accountState:'validated',
                     subCard: 3
                 }
             )));
