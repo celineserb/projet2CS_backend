@@ -280,22 +280,28 @@ export async function getSubscriptionByTenant(req: Request, res:Response) {
 export async function debitBalance(req:Request, res:Response){
     const subCard = await Subscription.findOne(req.body.idSub)
     if(subCard){
-        if(subCard.solde >= req.body.prix){
-            subCard.solde = subCard.solde - req.body.prix
-            const saved = await Subscription.save(subCard)
-            if(saved){
-                res.status(201).json({
-                    balance : saved.solde,
-                    msg: "success"
-                })
+        if(subCard.subState=='expired'){
+            if(subCard.solde >= req.body.prix){
+                subCard.solde = subCard.solde - req.body.prix
+                const saved = await Subscription.save(subCard)
+                if(saved){
+                    res.status(201).json({
+                        balance : saved.solde,
+                        msg: "success"
+                    })
+                }else{
+                    res.status(500).json({
+                        msg: "The changes could not be saved."
+                    })
+                }
             }else{
-                res.status(500).json({
-                    msg: "The changes could not be saved."
+                res.status(400).json({
+                    msg: "The balance isn't enought for this payment."
                 })
             }
         }else{
             res.status(400).json({
-                msg: "The balance isn't enought for this payment."
+                msg: "Your susbscribtion has expired"
             })
         }
     }else{
